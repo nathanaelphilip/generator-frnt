@@ -58,6 +58,20 @@ module.exports = yeoman.generators.Base.extend({
         this.templatePath('_composer.json'),
         this.destinationPath('composer.json')
       );
+      this.fs.copy(
+        this.templatePath('_robots.txt'),
+        this.destinationPath('../robots.txt')
+      );
+      this.fs.copyTpl(
+        this.templatePath('_dandelion.yml'),
+        this.destinationPath('../production.yml'),
+        {'robots': false}
+      );
+      this.fs.copyTpl(
+        this.templatePath('_dandelion.yml'),
+        this.destinationPath('../staging.yml'),
+        {'robots': true}
+      );
     },
 
     projectfiles: function () {

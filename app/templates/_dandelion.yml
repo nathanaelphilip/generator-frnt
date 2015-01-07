@@ -1,0 +1,14 @@
+adapter: ftp
+host: example.com
+username: user
+password: pass
+path: /
+
+exclude:
+    - .gitignore
+    - dandelion.yml
+    - dir/
+
+
+additional:
+	<% if(robots) { %>- robots.txt<% } %>
