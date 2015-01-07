@@ -1,6 +1,9 @@
 {
   "name": "package",
   "version": "0.0.0",
-  "dependencies": {}
+  "dependencies": {
+  	"components-modernizr": "~2.8.3",
+  	"html5shiv" : "~3.7.2",
+  	"jquery" : "~2.1.3"
+  }
 }
-

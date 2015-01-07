@@ -1,0 +1,7 @@
+{
+    "require": {
+        "andreyco/instagram": "~3.2.0",
+        "abraham/twitteroauth": "~0.2.1",
+        "drewm/mailchimp-api": "~1.0"
+    }
+}

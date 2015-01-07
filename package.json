@@ -1,7 +1,7 @@
 {
   "name": "generator-frnt",
-  "version": "0.0.0",
-  "description": "Yeoman generator",
+  "version": "0.1.0",
+  "description": "Front End Scaffolding for Stitch Projects",
   "license": "MIT",
   "main": "app/index.js",
   "repository": "nathanaelphilip/generator-frnt",
