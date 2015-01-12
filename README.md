@@ -11,6 +11,7 @@ A quick start up generator for Stitch.
 [x] Set up bower to pull in jQuery
 [x] Set up myth files
 [x] Set up for Dandelion
+[] Include Picturefill.js http://scottjehl.github.io/picturefill/
 [] Compress Images
 [] Set up for SASS
 [] Set up for Coffee Script

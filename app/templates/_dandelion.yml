@@ -3,11 +3,16 @@ host: example.com
 username: user
 password: pass
 path: /
+local_path: html
 
 exclude:
     - .gitignore
-    - dandelion.yml
-    - dir/
+    - production.yml
+    - staging.yml
+    - .csscomb.json
+    - gulfile.js
+    - package.json
+    - composer.json
 
 
 additional:

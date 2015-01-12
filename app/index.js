@@ -62,6 +62,10 @@ module.exports = yeoman.generators.Base.extend({
         this.templatePath('_robots.txt'),
         this.destinationPath('../robots.txt')
       );
+      this.fs.copy(
+        this.templatePath('_gitignore'),
+        this.destinationPath('../.gitignore')
+      );
       this.fs.copyTpl(
         this.templatePath('_dandelion.yml'),
         this.destinationPath('../production.yml'),

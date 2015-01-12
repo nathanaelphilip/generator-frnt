@@ -11,7 +11,7 @@ jQuery(document).ready(function($) {
 
 	// helpers
 
-	scrollTo($element){
+	function scrollTo($element){
 		$('html, body').animate({scrollTop: $element.offset().top}, 500);
 	}
 
