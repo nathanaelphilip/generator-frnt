@@ -12,6 +12,7 @@ module.exports = yeoman.generators.Base.extend({
   
   initializing: function () {
     this.pkg = require('../package.json');
+    this.choices = {};
   },
 
   prompting: function () {
@@ -26,11 +27,11 @@ module.exports = yeoman.generators.Base.extend({
       type: 'list',
       name: 'cssProcessor',
       message: 'Which ' + chalk.red('CSS Processor') + ' would you like to use?',
-      choices: ['myth']
+      choices: ['myth','sass']
     }];
 
     this.prompt(prompts, function (props) {
-      this.cssProcessor = props.cssProcessor;
+      this.choices.cssProcessor = props.cssProcessor;
 
       done();
     }.bind(this));
@@ -38,17 +39,19 @@ module.exports = yeoman.generators.Base.extend({
 
   writing: {
     app: function () {
-      this.fs.copy(
+      this.fs.copyTpl(
         this.templatePath('_package.json'),
-        this.destinationPath('package.json')
+        this.destinationPath('package.json'),
+        {'processor': this.choices.cssProcessor}
       );
       this.fs.copy(
         this.templatePath('_bower.json'),
         this.destinationPath('bower.json')
       );
-      this.fs.copy(
+      this.fs.copyTpl(
         this.templatePath('_gulp.js'),
-        this.destinationPath('gulpfile.js')
+        this.destinationPath('gulpfile.js'),
+        {'processor': this.choices.cssProcessor}
       );
       this.fs.copy(
         this.templatePath('_csscomb.json'),
@@ -105,10 +108,17 @@ module.exports = yeoman.generators.Base.extend({
         this.templatePath('css/_reset.css'),
         this.destinationPath('assets/css/reset.css')
       );
-      this.fs.copy(
-        this.templatePath('css/_myth.css'),
-        this.destinationPath('assets/css/myth.css')
-      );
+
+      if (this.choices.cssProcessor == 'myth') {
+        
+        this.fs.copy(
+          this.templatePath('css/_myth.css'),
+          this.destinationPath('assets/css/myth.css')
+        );
+
+      };
+
+      
       // copy over js
       this.fs.copy(
         this.templatePath('js/app.js'),

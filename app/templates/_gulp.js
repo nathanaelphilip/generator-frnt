@@ -1,9 +1,11 @@
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 
+<%  var stylesheet = 'myth.css'; if (processor == 'sass') { stylesheet = 'style.scss'; } %>
+
 var paths = {
   css: {
-  	src: ['assets/css/myth.css'],
+  	src: ['assets/css/<%= stylesheet %>'],
   	dest: 'assets/css/'	
   },
   javascript: {
@@ -33,7 +35,8 @@ gulp.task('js', function() {
 gulp.task('css', function() {
   
   return gulp.src(paths.css.src)
-        .pipe($.myth())
+        .pipe($.plumber())
+        <% if(processor == 'myth') { %>.pipe($.myth())<% } %><% if(processor == 'sass') { %>.pipe($.sass())<% } %>
         .pipe($.rename('style.css'))
         .pipe($.csscomb())
         .pipe(gulp.dest(paths.css.dest));
