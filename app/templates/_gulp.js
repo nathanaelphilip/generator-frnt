@@ -44,7 +44,7 @@ gulp.task('css', function() {
 });
 
 gulp.task('watch', function() {
-	var server = $.livereload();
+	var server = $.livereload;
 
 	var reload = function(file) {
 		server.changed(file.path);
