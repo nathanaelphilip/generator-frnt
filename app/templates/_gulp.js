@@ -47,11 +47,9 @@ gulp.task('css', function() {
 });
 
 gulp.task('watch', function() {
-	var server = $.livereload;
-
-	var reload = function(file) {
-		server.changed(file.path);
-	};
+	
+  var server = $.livereload;
+  server.listen();
 
 	gulp.watch(paths.css.src, ['css']); // watch for changes to css and run the css task
 	gulp.watch(paths.javascript.src, ['js']); // watch for changes to js and run the js task
