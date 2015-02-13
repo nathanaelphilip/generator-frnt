@@ -136,7 +136,7 @@ module.exports = yeoman.generators.Base.extend({
         
         this.fs.copy(
           this.templatePath('css/_style.scss'),
-          this.destinationPath('assets/css/style.css')
+          this.destinationPath('assets/css/style.scss')
         );
 
         this.fs.write('assets/css/global/_variable.scss','');
