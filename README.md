@@ -2,7 +2,9 @@
 
 > [Yeoman](http://yeoman.io) generator
 
-
 ## FRNT
 
 A quick start up generator for Stitch web projects.
+=======
+# generator-frnt
+Front end Yeoman generator featuring Myth.
