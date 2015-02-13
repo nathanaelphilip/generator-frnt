@@ -135,8 +135,8 @@ module.exports = yeoman.generators.Base.extend({
       if (this.choices.cssProcessor == 'sass') {
         
         this.fs.copy(
-          this.templatePath('css/_style.scss'),
-          this.destinationPath('assets/css/style.scss')
+          this.templatePath('css/_main.scss'),
+          this.destinationPath('assets/css/main.scss')
         );
 
         this.fs.write('assets/css/global/_variable.scss','');

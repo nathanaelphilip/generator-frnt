@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var livereload = require('gulp-livereload');
 
-<%  var stylesheet = 'myth.css'; if (processor == 'sass') { stylesheet = 'style.scss'; } %>
+<%  var stylesheet = 'myth.css'; if (processor == 'sass') { stylesheet = 'main.scss'; } %>
 
 var paths = {
   css: {
