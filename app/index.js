@@ -16,25 +16,35 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   prompting: function () {
+    
     var done = this.async();
 
-    // Have Yeoman greet the user.
     this.log(yosay(
       'Welcome to the cat\'s pajamas ' + chalk.red('Frnt') + ' generator!'
     ));
 
     var prompts = [{
       type: 'list',
-      name: 'cssProcessor',
+      name: 'css',
       message: 'Which ' + chalk.red('CSS Processor') + ' would you like to use?',
-      choices: ['myth','sass']
+      choices: ['myth','sass'],
+      store: true
+    },{
+      type: 'list',
+      name: 'deploy',
+      message: 'What are you going to use to deploy?',
+      choice: ['dandelion','manually'],
+      store: true
     }];
 
     this.prompt(prompts, function (props) {
-      this.choices.cssProcessor = props.cssProcessor;
+      
+      this.choices.css = props.css;
+      this.choices.deploy = props.deploy;
 
       done();
     }.bind(this));
+
   },
 
   writing: {
@@ -43,7 +53,7 @@ module.exports = yeoman.generators.Base.extend({
       this.fs.copyTpl(
         this.templatePath('_package.json'),
         this.destinationPath('package.json'),
-        {'processor': this.choices.cssProcessor}
+        {'processor': this.choices.css}
       );
       
       this.fs.copy(
@@ -54,7 +64,7 @@ module.exports = yeoman.generators.Base.extend({
       this.fs.copyTpl(
         this.templatePath('_gulp.js'),
         this.destinationPath('gulpfile.js'),
-        {'processor': this.choices.cssProcessor}
+        {'processor': this.choices.css}
       );
       
       this.fs.copy(
@@ -76,18 +86,24 @@ module.exports = yeoman.generators.Base.extend({
         this.templatePath('_gitignore'),
         this.destinationPath('../.gitignore')
       );
+
+      if (this.choices.deploy == 'dandelion') {
+
+        this.fs.copyTpl(
+          this.templatePath('_dandelion.yml'),
+          this.destinationPath('../production.yml'),
+          {'robots': false}
+        );
+        
+        this.fs.copyTpl(
+          this.templatePath('_dandelion.yml'),
+          this.destinationPath('../staging.yml'),
+          {'robots': true}
+        );
+
+      };
       
-      this.fs.copyTpl(
-        this.templatePath('_dandelion.yml'),
-        this.destinationPath('../production.yml'),
-        {'robots': false}
-      );
       
-      this.fs.copyTpl(
-        this.templatePath('_dandelion.yml'),
-        this.destinationPath('../staging.yml'),
-        {'robots': true}
-      );
 
     },
 
@@ -99,7 +115,7 @@ module.exports = yeoman.generators.Base.extend({
       this.mkdir('assets/js');
       this.mkdir('assets/js/vendor');
 
-      if (this.choices.cssProcessor == 'sass') {
+      if (this.choices.css == 'sass') {
         this.mkdir('assets/css/global');
       }
 
@@ -123,7 +139,7 @@ module.exports = yeoman.generators.Base.extend({
         this.destinationPath('assets/css/reset.css')
       );
 
-      if (this.choices.cssProcessor == 'myth') {
+      if (this.choices.css == 'myth') {
         
         this.fs.copy(
           this.templatePath('css/_myth.css'),
@@ -132,7 +148,7 @@ module.exports = yeoman.generators.Base.extend({
 
       };
 
-      if (this.choices.cssProcessor == 'sass') {
+      if (this.choices.css == 'sass') {
         
         this.fs.copy(
           this.templatePath('css/_main.scss'),
@@ -150,6 +166,7 @@ module.exports = yeoman.generators.Base.extend({
         this.templatePath('js/app.js'),
         this.destinationPath('assets/js/app.js')
       );
+
     }
   },
 
@@ -158,4 +175,5 @@ module.exports = yeoman.generators.Base.extend({
       skipInstall: this.options['skip-install']
     });
   }
+  
 });
