@@ -1,0 +1,48 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'version', 'minor' ]
+2 info using npm@2.5.1
+3 info using node@v0.12.0
+4 verbose node symlink /usr/local/bin/node
+5 info git [ 'status', '--porcelain' ]
+6 verbose version.write data { name: 'generator-frnt',
+6 verbose version.write   version: '0.2.0',
+6 verbose version.write   description: 'Front End Scaffolding for Stitch Projects',
+6 verbose version.write   license: 'MIT',
+6 verbose version.write   main: 'app/index.js',
+6 verbose version.write   repository: 'nathanaelphilip/generator-frnt',
+6 verbose version.write   author:
+6 verbose version.write    { name: 'Nathanael Moody',
+6 verbose version.write      email: 'phil@stitchdesignco.com',
+6 verbose version.write      url: 'http://bitbucket.org/stitchdesignco/' },
+6 verbose version.write   engines: { node: '>=0.10.0' },
+6 verbose version.write   files: [ 'app' ],
+6 verbose version.write   keywords: [ 'yeoman-generator' ],
+6 verbose version.write   dependencies:
+6 verbose version.write    { 'yeoman-generator': '^0.18.8',
+6 verbose version.write      chalk: '^0.5.1',
+6 verbose version.write      yosay: '^1.0.2' },
+6 verbose version.write   devDependencies: { mocha: '*' },
+6 verbose version.write   peerDependencies: { yo: '>=1.4.5' } } to package.json
+7 info git [ 'add', 'package.json' ]
+8 info git [ 'commit', '-m', '0.2.0' ]
+9 info git [ 'tag', 'v0.2.0', '-am', '0.2.0' ]
+10 verbose stack Error: Command failed: git tag v0.2.0 -am 0.2.0
+10 verbose stack fatal: tag 'v0.2.0' already exists
+10 verbose stack
+10 verbose stack     at ChildProcess.exithandler (child_process.js:744:12)
+10 verbose stack     at ChildProcess.emit (events.js:110:17)
+10 verbose stack     at maybeClose (child_process.js:1008:16)
+10 verbose stack     at Socket.<anonymous> (child_process.js:1176:11)
+10 verbose stack     at Socket.emit (events.js:107:17)
+10 verbose stack     at Pipe.close (net.js:476:12)
+11 verbose cwd /Users/Phil/Code/generator-frnt
+12 error Darwin 14.1.0
+13 error argv "node" "/usr/local/bin/npm" "version" "minor"
+14 error node v0.12.0
+15 error npm  v2.5.1
+16 error code 128
+17 error Command failed: git tag v0.2.0 -am 0.2.0
+17 error fatal: tag 'v0.2.0' already exists
+18 error If you need help, you may report this error at:
+18 error     <http://github.com/npm/npm/issues>
+19 verbose exit [ 1, true ]
