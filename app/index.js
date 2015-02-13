@@ -139,8 +139,8 @@ module.exports = yeoman.generators.Base.extend({
           this.destinationPath('assets/css/style.css')
         );
 
-        this.touch('assets/css/global/_variable.scss');
-        this.touch('assets/css/global/_fonts.scss');
+        this.write('assets/css/global/_variable.scss');
+        this.write('assets/css/global/_fonts.scss');
 
       };
 
