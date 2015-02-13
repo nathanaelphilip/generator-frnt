@@ -38,7 +38,13 @@ gulp.task('css', function() {
   
   return gulp.src(paths.css.src)
         .pipe($.plumber())
-        <% if(processor == 'myth') { %>.pipe($.myth())<% } %><% if(processor == 'sass') { %>.pipe($.sass())<% } %>
+        <% if(processor == 'myth') { %>
+          .pipe($.myth())
+        <% } %>
+        <% if(processor == 'sass') { %>
+          .pipe($.sass())
+          .pipe($.autoprefixer())
+        <% } %>
         .pipe($.rename('style.css'))
         .pipe($.csscomb())
         .pipe(gulp.dest(paths.css.dest))

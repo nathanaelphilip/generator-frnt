@@ -39,46 +39,56 @@ module.exports = yeoman.generators.Base.extend({
 
   writing: {
     app: function () {
+      
       this.fs.copyTpl(
         this.templatePath('_package.json'),
         this.destinationPath('package.json'),
         {'processor': this.choices.cssProcessor}
       );
+      
       this.fs.copy(
         this.templatePath('_bower.json'),
         this.destinationPath('bower.json')
       );
+      
       this.fs.copyTpl(
         this.templatePath('_gulp.js'),
         this.destinationPath('gulpfile.js'),
         {'processor': this.choices.cssProcessor}
       );
+      
       this.fs.copy(
         this.templatePath('_csscomb.json'),
         this.destinationPath('.csscomb.json')
       );
+      
       this.fs.copy(
         this.templatePath('_composer.json'),
         this.destinationPath('composer.json')
       );
+      
       this.fs.copy(
         this.templatePath('_robots.txt'),
         this.destinationPath('../robots.txt')
       );
+      
       this.fs.copy(
         this.templatePath('_gitignore'),
         this.destinationPath('../.gitignore')
       );
+      
       this.fs.copyTpl(
         this.templatePath('_dandelion.yml'),
         this.destinationPath('../production.yml'),
         {'robots': false}
       );
+      
       this.fs.copyTpl(
         this.templatePath('_dandelion.yml'),
         this.destinationPath('../staging.yml'),
         {'robots': true}
       );
+
     },
 
     projectfiles: function () {
@@ -88,6 +98,10 @@ module.exports = yeoman.generators.Base.extend({
       this.mkdir('assets/images');
       this.mkdir('assets/js');
       this.mkdir('assets/js/vendor');
+
+      if (this.choices.cssProcessor == 'sass') {
+        this.mkdir('assets/css/global');
+      }
 
       this.fs.copy(
         this.templatePath('editorconfig'),
@@ -115,6 +129,18 @@ module.exports = yeoman.generators.Base.extend({
           this.templatePath('css/_myth.css'),
           this.destinationPath('assets/css/myth.css')
         );
+
+      };
+
+      if (this.choices.cssProcessor == 'sass') {
+        
+        this.fs.copy(
+          this.templatePath('css/_style.scss'),
+          this.destinationPath('assets/css/style.css')
+        );
+
+        this.touch('assets/css/global/_variable.scss');
+        this.touch('assets/css/global/_fonts.scss');
 
       };
 
