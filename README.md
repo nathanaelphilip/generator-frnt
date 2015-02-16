@@ -32,4 +32,3 @@ Change into the html directory and start up gulp!
 
 #### Issues
 Feel free to submit requests as issues!
->>>>>>> develop
