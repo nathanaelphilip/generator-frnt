@@ -3,13 +3,7 @@
 > [Yeoman](http://yeoman.io) generator
 
 ## FRNT
-
-<<<<<<< HEAD
-A quick start up generator for Stitch web projects.
-=======
-# generator-frnt
 Front end Yeoman generator featuring Myth.
-=======
 A quick start up generator for Front End Web Projects.
 
 ### Install
