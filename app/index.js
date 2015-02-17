@@ -29,17 +29,38 @@ module.exports = yeoman.generators.Base.extend({
       message: 'Which ' + chalk.red('CSS Processor') + ' would you like to use?',
       choices: ['myth','sass'],
       store: true
+    },
+    {
+      type: 'checkbox',
+      name: 'csshelpers',
+      message: 'Which CSS helpers would you like?',
+      choices: [
+        {
+          name: 'Helpers',
+          checked: true
+        },
+        {
+          name: 'Reset',
+          checked: true
+        },
+        {
+          name: 'Normalize',
+          checked: true
+        }
+      ],
+      store: true
     },{
       type: 'list',
       name: 'deploy',
       message: 'What are you going to use to deploy?',
-      choice: ['dandelion','manually'],
+      choices: ['dandelion','manually'],
       store: true
     }];
 
     this.prompt(prompts, function (props) {
       
       this.choices.css = props.css;
+      this.choices.csshelpers = props.csshelpers;
       this.choices.deploy = props.deploy;
 
       done();
@@ -133,11 +154,17 @@ module.exports = yeoman.generators.Base.extend({
         this.destinationPath('index.php'),
         {'title' : 'frnt'}
       );
-      // copy over css
-      this.fs.copy(
-        this.templatePath('css/_reset.css'),
-        this.destinationPath('assets/css/reset.css')
-      );
+      
+      // merge css helpers into a helper.css file
+      var helpers = '';
+
+      for (var i = this.choices.csshelpers.length - 1; i >= 0; i--) {
+
+        helpers += this.fs.read(this.templatePath('css/helpers/_'+this.choices.csshelpers[i].toLowerCase()+'.css'));
+
+      };
+
+      this.fs.write(this.destinationPath('assets/css/helpers.css'),helpers);
 
       if (this.choices.css == 'myth') {
         

@@ -12,15 +12,19 @@ It aims to be light and flexible and is built more for brochure sites than for l
 ### Install
 
 Install
+
 `npm install -g generator-frnt`
 
 Make a new directory and cd into it:
+
 `mkdir new-website-project && cd $_`
 
 Run yo frnt to set things up!
+
 `yo frnt`
 
 Change into the html directory and start up gulp!
+
 `cd html; gulp`
 
 #### Technologies
