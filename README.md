@@ -36,6 +36,10 @@ Change into the html directory and start up gulp!
 - [css comb](http://csscomb.com)
 - [live reload](http://livereload.com)
 
+#### Release Notes
+v 0.3.1
+ - adds css helpers choice
 
-#### Issues
+
+#### Requests
 Feel free to submit requests as issues!
