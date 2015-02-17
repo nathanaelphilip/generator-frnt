@@ -1,0 +1,20 @@
+.ir { 
+	display: block; 
+	text-indent: -999em;
+	overflow: hidden;
+	background-repeat: no-repeat;
+	text-align: left;
+	direction: ltr; 
+}
+
+.group:before, .group:after { 
+	content: "\0020"; display: block; height: 0; overflow: hidden; 
+}
+
+.group:after { 
+	clear: both; 
+}
+
+.group { 
+	zoom: 1; 
+}
