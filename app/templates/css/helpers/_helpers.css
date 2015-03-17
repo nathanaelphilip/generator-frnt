@@ -18,3 +18,12 @@
 .group { 
 	zoom: 1; 
 }
+
+.full-height 																				{height:100%;}
+					
+.container                                                      							{margin:0 auto;max-width:1200px;width:90%;}
+					
+.v-center																					{position:absolute;top:50%;transform:translateY(-50%);width:100%;}
+					
+.layout-table                                                  								{display:table;table-layout:fixed;width:100%;}
+.layout-td                                                     								{display: table-cell;vertical-align:top;}
