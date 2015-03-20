@@ -1,0 +1,94 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'link' ]
+2 info using npm@2.5.1
+3 info using node@v0.12.0
+4 verbose node symlink /usr/local/bin/node
+5 verbose linkPkg /Users/Phil/Code/generator-frnt
+6 verbose gentlyRm vacuuming /usr/local/lib/node_modules/generator-frnt
+7 silly gentlyRm purging /usr/local/lib/node_modules/generator-frnt
+8 silly gentlyRm quitting because other entries in /usr/local/lib/node_modules
+9 verbose gentlyRm vacuuming /usr/local/lib/node_modules/generator-frnt
+10 verbose link build target /usr/local/lib/node_modules/generator-frnt
+11 verbose install where, what [ '/Users/Phil/Code/generator-frnt', [] ]
+12 verbose install where, deps [ '/Users/Phil/Code/generator-frnt',
+12 verbose install   [ 'yeoman-generator', 'chalk', 'yosay', 'mocha' ] ]
+13 verbose install peerDependency yo wasn't going to be installed; adding
+14 verbose install where, peers [ '/Users/Phil/Code/generator-frnt', [ 'yo' ] ]
+15 info preinstall generator-frnt@0.3.3
+16 verbose already installed skipping yo@>=1.4.5 /Users/Phil/Code/generator-frnt
+17 verbose already installed skipping yeoman-generator@^0.18.8 /Users/Phil/Code/generator-frnt
+18 verbose already installed skipping chalk@^0.5.1 /Users/Phil/Code/generator-frnt
+19 verbose already installed skipping yosay@^1.0.2 /Users/Phil/Code/generator-frnt
+20 verbose already installed skipping mocha@* /Users/Phil/Code/generator-frnt
+21 silly install resolved []
+22 info build /Users/Phil/Code/generator-frnt
+23 verbose linkStuff [ false, false, false, '/Users/Phil/Code' ]
+24 info linkStuff generator-frnt@0.3.3
+25 verbose linkBins generator-frnt@0.3.3
+26 verbose linkMans generator-frnt@0.3.3
+27 verbose rebuildBundles generator-frnt@0.3.3
+28 verbose rebuildBundles [ '.bin', 'chalk', 'mocha', 'yeoman-generator', 'yo', 'yosay' ]
+29 verbose rebuild bundle /Users/Phil/Code/generator-frnt/node_modules/yo
+30 info build /Users/Phil/Code/generator-frnt/node_modules/yo
+31 info preinstall yo@1.3.3
+32 verbose linkStuff [ false,
+32 verbose linkStuff   false,
+32 verbose linkStuff   false,
+32 verbose linkStuff   '/Users/Phil/Code/generator-frnt/node_modules' ]
+33 info linkStuff yo@1.3.3
+34 warn prefer global yo@1.3.3 should be installed with -g
+35 verbose linkBins yo@1.3.3
+36 verbose link bins [ { yo: 'cli.js' },
+36 verbose link bins   '/Users/Phil/Code/generator-frnt/node_modules/.bin',
+36 verbose link bins   false ]
+37 verbose linkMans yo@1.3.3
+38 verbose rebuildBundles yo@1.3.3
+39 verbose gentlyRm vacuuming /Users/Phil/Code/generator-frnt/node_modules/.bin/yo
+40 silly gentlyRm purging /Users/Phil/Code/generator-frnt/node_modules/.bin/yo
+41 verbose rebuildBundles [ '.bin',
+41 verbose rebuildBundles   'async',
+41 verbose rebuildBundles   'configstore',
+41 verbose rebuildBundles   'findup',
+41 verbose rebuildBundles   'fullname',
+41 verbose rebuildBundles   'insight',
+41 verbose rebuildBundles   'is-root',
+41 verbose rebuildBundles   'lodash',
+41 verbose rebuildBundles   'multiline',
+41 verbose rebuildBundles   'nopt',
+41 verbose rebuildBundles   'opn',
+41 verbose rebuildBundles   'shelljs',
+41 verbose rebuildBundles   'string-length',
+41 verbose rebuildBundles   'sudo-block',
+41 verbose rebuildBundles   'underscore.string',
+41 verbose rebuildBundles   'update-notifier',
+41 verbose rebuildBundles   'yeoman-character',
+41 verbose rebuildBundles   'yeoman-doctor',
+41 verbose rebuildBundles   'yeoman-environment',
+41 verbose rebuildBundles   'yeoman-generator',
+41 verbose rebuildBundles   'yosay' ]
+42 silly gentlyRm quitting because other entries in /Users/Phil/Code/generator-frnt/node_modules/.bin
+43 info install yo@1.3.3
+44 info postinstall yo@1.3.3
+45 verbose unsafe-perm in lifecycle true
+46 info install generator-frnt@0.3.3
+47 info postinstall generator-frnt@0.3.3
+48 info prepublish generator-frnt@0.3.3
+49 verbose stack Error: The package yo does not satisfy its siblings' peerDependencies requirements!
+49 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:103:32
+49 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:225:5
+49 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:138:5
+49 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:251:14
+49 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+49 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:251:14
+49 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+49 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:251:14
+49 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+49 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:251:14
+50 verbose cwd /Users/Phil/Code/generator-frnt
+51 error Darwin 14.1.0
+52 error argv "node" "/usr/local/bin/npm" "link"
+53 error node v0.12.0
+54 error npm  v2.5.1
+55 error code EPEERINVALID
+56 error peerinvalid The package yo does not satisfy its siblings' peerDependencies requirements!
+57 verbose exit [ 1, true ]
