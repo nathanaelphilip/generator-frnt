@@ -148,10 +148,18 @@ module.exports = yeoman.generators.Base.extend({
         this.templatePath('jshintrc'),
         this.destinationPath('.jshintrc')
       );
+      
       // copy over index.php
       this.fs.copyTpl(
         this.templatePath('_index.php'),
         this.destinationPath('index.php'),
+        {'title' : 'frnt'}
+      );
+
+      // copy over functions.php
+      this.fs.copyTpl(
+        this.templatePath('_functions.php'),
+        this.destinationPath('functions.php'),
         {'title' : 'frnt'}
       );
       
