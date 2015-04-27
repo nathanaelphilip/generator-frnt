@@ -1,6 +1,6 @@
 {
   "name": "generator-frnt",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Front End Scaffolding for Stitch Projects",
   "license": "MIT",
   "main": "app/index.js",
