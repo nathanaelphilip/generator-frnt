@@ -45,8 +45,7 @@ gulp.task('img', function() {
 
   return gulp.src(paths.img.src)
     .pipe(imagemin({
-      progressive: true,
-      use: [pngquant()]
+      progressive: true
     }))
     .pipe(gulp.dest(paths.img.dest));
 
@@ -88,8 +87,6 @@ gulp.task('watch', function() {
   gulp.watch(paths.svg.src,['svg']); // 
   gulp.watch(paths.img.src,['img']); // 
 	gulp.watch(paths.css.src, ['css']); // watch for changes to css and run the css task
-  gulp.watch(paths.images.src,['image-min']); // for changes to jpg or png files
-  gulp.watch(paths.svg.src,['svg-min']); // for changes to svg files
 	gulp.watch(paths.javascript.src, ['js']); // watch for changes to js and run the js task
 	gulp.watch(['**.php']).on('change',function(file){
     livereload.changed(file.path);
