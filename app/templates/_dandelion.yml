@@ -13,5 +13,6 @@ exclude:
     - gulfile.js
     - package.json
     - composer.json
+    - **/src/
 additional:
     <% if(robots) { %>- robots.txt<% } %>

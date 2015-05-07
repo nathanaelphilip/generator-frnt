@@ -6,12 +6,20 @@ var livereload = require('gulp-livereload');
 
 var paths = {
   css: {
-  	src: ['assets/css/<%= stylesheet %>'],
+  	src: ['src/css/<%= stylesheet %>'],
   	dest: 'assets/css/'	
   },
   javascript: {
-  	src: ['assets/js/app.js'],
+  	src: ['src/js/app.js'],
   	dest: 'assets/js/'
+  },
+  svg: {
+    src: ['src/svg/*.svg'],
+    dest: 'assets/svg/'
+  },
+  img: {
+    src: ['src/images/*'],
+    dest: 'assets/images/'
   }
 };
 
@@ -30,6 +38,27 @@ gulp.task('js', function() {
         .pipe($.concat("app.min.js"))
         .pipe(gulp.dest(paths.javascript.dest))
         .pipe(livereload());
+
+});
+
+gulp.task('img', function() {
+
+  return gulp.src(paths.img.src)
+    .pipe(imagemin({
+      progressive: true,
+      use: [pngquant()]
+    }))
+    .pipe(gulp.dest(paths.img.dest));
+
+});
+
+gulp.task('svg', function() {
+
+  return gulp.src(paths.svg.src)
+    .pipe(imagemin({
+      svgoPlugins: [{removeViewBox: true}],
+    }))
+    .pipe(gulp.dest(paths.svg.dest));
 
 });
 
@@ -57,6 +86,8 @@ gulp.task('watch', function() {
   var server = $.livereload;
   server.listen();
 
+  gulp.watch(paths.svg.src,['svg']); // 
+  gulp.watch(paths.img.src,['img']); // 
 	gulp.watch(paths.css.src, ['css']); // watch for changes to css and run the css task
 	gulp.watch(paths.javascript.src, ['js']); // watch for changes to js and run the js task
 	gulp.watch(['**.php']).on('change',function(file){
@@ -65,4 +96,11 @@ gulp.task('watch', function() {
   
 });
 
-gulp.task('default', ['copy','css','js','watch']);
+gulp.task('default', ['copy','css','js','watch','svg','img']);
+
+
+
+
+
+
+
