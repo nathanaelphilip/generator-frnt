@@ -1,5 +1,6 @@
 :root  																						{--sansserif:"Arial",sans-serif;--serif:"Georgia",sans-serif;}
 					
+@custom-media --mobile screen and (max-width: 720px);
 					
 body 																						{}
 					

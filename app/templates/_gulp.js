@@ -13,13 +13,13 @@ var paths = {
   	src: ['src/js/app.js'],
   	dest: 'assets/js/'
   },
-  images: {
-    src: ['src/images/*.jpg|png'],
-    dest: 'assets/images/'
-  },
   svg: {
-    src: ['src/svg/*'],
+    src: ['src/svg/*.svg'],
     dest: 'assets/svg/'
+  },
+  img: {
+    src: ['src/images/*'],
+    dest: 'assets/images/'
   }
 };
 
@@ -41,23 +41,26 @@ gulp.task('js', function() {
 
 });
 
+gulp.task('img', function() {
 
-gulp.task('image-min', function () {
-    return gulp.src(paths.images.src)
-        .pipe($.imagemin({
-            progressive: true
-        }))
-        .pipe(gulp.dest(paths.images.dest));
+  return gulp.src(paths.img.src)
+    .pipe(imagemin({
+      progressive: true,
+      use: [pngquant()]
+    }))
+    .pipe(gulp.dest(paths.img.dest));
+
 });
 
-gulp.task('svg-min', function () {
-    return gulp.src(paths.svg.src)
-        .pipe($.imagemin({
-            svgoPlugins: [{removeViewBox: true}],
-        }))
-        .pipe(gulp.dest(paths.svg.dest));
-});
+gulp.task('svg', function() {
 
+  return gulp.src(paths.svg.src)
+    .pipe(imagemin({
+      svgoPlugins: [{removeViewBox: true}],
+    }))
+    .pipe(gulp.dest(paths.svg.dest));
+
+});
 
 gulp.task('css', function() {
   
@@ -82,6 +85,8 @@ gulp.task('watch', function() {
   var server = $.livereload;
   server.listen();
 
+  gulp.watch(paths.svg.src,['svg']); // 
+  gulp.watch(paths.img.src,['img']); // 
 	gulp.watch(paths.css.src, ['css']); // watch for changes to css and run the css task
   gulp.watch(paths.images.src,['image-min']); // for changes to jpg or png files
   gulp.watch(paths.svg.src,['svg-min']); // for changes to svg files
@@ -92,4 +97,4 @@ gulp.task('watch', function() {
   
 });
 
-gulp.task('default', ['copy','css','js','watch','image-min','svg-min']);
+gulp.task('default', ['copy','css','js','watch','svg','img']);

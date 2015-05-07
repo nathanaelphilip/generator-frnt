@@ -130,11 +130,16 @@ module.exports = yeoman.generators.Base.extend({
 
     projectfiles: function () {
 
+      this.mkdir('src');
+      this.mkdir('src/css');
+      this.mkdir('src/images');
+      this.mkdir('src/js/');
+      this.mkdir('src/js/vendor');
+
       this.mkdir('assets');
       this.mkdir('assets/css');
       this.mkdir('assets/images');
       this.mkdir('assets/js');
-      this.mkdir('assets/js/vendor');
 
       if (this.choices.css == 'sass') {
         this.mkdir('assets/css/global');
@@ -159,8 +164,7 @@ module.exports = yeoman.generators.Base.extend({
       // copy over functions.php
       this.fs.copyTpl(
         this.templatePath('_functions.php'),
-        this.destinationPath('functions.php'),
-        {'title' : 'frnt'}
+        this.destinationPath('functions.php')
       );
       
       // merge css helpers into a helper.css file
@@ -172,13 +176,13 @@ module.exports = yeoman.generators.Base.extend({
 
       };
 
-      this.fs.write(this.destinationPath('assets/css/helpers.css'),helpers);
+      this.fs.write(this.destinationPath('assets/src/helpers.css'),helpers);
 
       if (this.choices.css == 'myth') {
         
         this.fs.copy(
           this.templatePath('css/_myth.css'),
-          this.destinationPath('assets/css/myth.css')
+          this.destinationPath('src/css/myth.css')
         );
 
       };
@@ -187,11 +191,11 @@ module.exports = yeoman.generators.Base.extend({
         
         this.fs.copy(
           this.templatePath('css/_main.scss'),
-          this.destinationPath('assets/css/main.scss')
+          this.destinationPath('src/css/main.scss')
         );
 
-        this.fs.write('assets/css/global/_variable.scss','');
-        this.fs.write('assets/css/global/_fonts.scss','');
+        this.fs.write('assets/src/global/_variable.scss','');
+        this.fs.write('assets/src/global/_fonts.scss','');
 
       };
 
@@ -199,7 +203,7 @@ module.exports = yeoman.generators.Base.extend({
       // copy over js
       this.fs.copy(
         this.templatePath('js/app.js'),
-        this.destinationPath('assets/js/app.js')
+        this.destinationPath('src/js/app.js')
       );
 
     }
