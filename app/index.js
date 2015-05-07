@@ -134,10 +134,12 @@ module.exports = yeoman.generators.Base.extend({
       this.mkdir('src/css');
       this.mkdir('src/images');
       this.mkdir('src/js/');
+      this.mkdir('src/svg/');
 
       this.mkdir('assets');
       this.mkdir('assets/css');
       this.mkdir('assets/images');
+      this.mkdir('assets/svg');
       this.mkdir('assets/js');
       this.mkdir('assets/js/vendor');
 
@@ -176,7 +178,7 @@ module.exports = yeoman.generators.Base.extend({
 
       };
 
-      this.fs.write(this.destinationPath('src/css/helpers.css'),helpers);
+      this.fs.write(this.destinationPath('assets/css/helpers.css'),helpers);
 
       if (this.choices.css == 'myth') {
         
