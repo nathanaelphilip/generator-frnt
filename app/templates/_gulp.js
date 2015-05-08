@@ -55,7 +55,11 @@ gulp.task('svg', function() {
 
   return gulp.src(paths.svg.src)
     .pipe(imagemin({
-      svgoPlugins: [{removeViewBox: true}],
+      svgoPlugins: [
+        {removeUselessStrokeAndFill: false},
+        {removeViewBox: true},
+        {cleanupIDs: false}
+      ],
     }))
     .pipe(gulp.dest(paths.svg.dest));
 
