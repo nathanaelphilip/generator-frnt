@@ -28,6 +28,17 @@
 
 	}
 
+	# Instagram
+
+	function prefix_instagram(){
+
+		$instagram = new Andreyco\Instagram\Client('c95bb5db73c64f55b7cee8430926ecfe');
+		$data = $instagram->getUserMedia('instagramid',5); 
+
+		return $data->data;
+        
+    }
+
 	# Forms (Generic)
 
 	function prefix_check_required_fields($data)

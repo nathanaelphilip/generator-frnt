@@ -18,7 +18,7 @@ var paths = {
     dest: 'assets/svg/'
   },
   img: {
-    src: ['src/images/*'],
+    src: ['src/images/*{.jpg,.png,.gif}'],
     dest: 'assets/images/'
   }
 };
@@ -54,7 +54,7 @@ gulp.task('img', function() {
 gulp.task('svg', function() {
 
   return gulp.src(paths.svg.src)
-    .pipe(imagemin({
+    .pipe($.imagemin({
       svgoPlugins: [
         {removeUselessStrokeAndFill: false},
         {removeViewBox: true},
