@@ -13,10 +13,12 @@ jQuery(document).ready(function($) {
 	$('.hnypt').remove();
 
 	$('form').on('submit', function(event) {
-		event.preventDefault();
 		
 		var data = $(this).serialize();
 		var $rqrd = $('.rqrd',this);
+		var $submit = $('.submit',this);
+
+		$submit.attr('disabled','disabled');
 
 		$rqrd.each(function(index, el) {
 				
@@ -39,10 +41,12 @@ jQuery(document).ready(function($) {
 		});
 
 		if ( $('.error.rqrd',this).length === 0 ) {
-			$.post('process.php',data, function(data, textStatus, xhr) {
-				console.log(data);
-			});
+			return true;
 		};
+
+		$submit.removeAttr('disabled');
+
+		return false;
 
 	});
 	
