@@ -8,14 +8,14 @@ var ftp = {
   staging: {
     'username': 'your ftp username',
     'password': 'your ftp password',
-    'host': 'ftp host path', // set ftp hostname. eg. 'ftp.example.com/htdocs'
-    'root': './public_html' // set local syncroot path. eg. './', './public_html' etc
+    'host': 'ftp host path', // set ftp hostname. eg. 'ftp.example.com/htdocs' #need full path here
+    'syncroot': 'html', // set local syncroot path. eg. './', './public_html' etc
   },
   production: {
     'username': 'your ftp username',
     'password': 'your ftp password',
     'host': 'ftp host path', // set ftp hostname. eg. 'ftp.example.com/htdocs'
-    'root': './public_html' // set local syncroot path. eg. './', './public_html' etc
+    'syncroot': 'html', // set local syncroot path. eg. './', './public_html' etc
   }
 }
 
@@ -101,19 +101,19 @@ gulp.task('css', function() {
 // git ftp init -s staging | git ftp push -s staging
 // git ftp init -s production | git ftp push -s production
 
-gulp.task('ftp-setup', function(){
+gulp.task('ftp-setup-staging', $.shell.task([
+  'git config git-ftp.staging.user ' + ftp.staging.username,
+  'git config git-ftp.staging.url ' + ftp.staging.host,
+  'git config git-ftp.staging.password ' + ftp.staging.password,
+  'git config git-ftp.staging.syncroot ' + ftp.staging.root
+]));
 
-    $.shell.task('git config ftp-ftp.staging.user ' + ftp.staging.username );
-    $.shell.task('git config ftp-ftp.staging.url ' + ftp.staging.host );
-    $.shell.task('git config ftp-ftp.staging.password ' + ftp.staging.password );
-    $.shell.task('git config ftp-ftp.staging.syncroot ' + ftp.staging.root );
-
-    $.shell.task('git config ftp-ftp.production.user ' + ftp.production.username );
-    $.shell.task('git config ftp-ftp.production.url ' + ftp.production.host );
-    $.shell.task('git config ftp-ftp.production.password ' + ftp.production.password );
-    $.shell.task('git config ftp-ftp.production.syncroot ' + ftp.production.root );
-
-});
+gulp.task('ftp-setup-production', $.shell.task([
+  'git config git-ftp.production.user ' + ftp.production.username,
+  'git config git-ftp.production.url ' + ftp.production.host,
+  'git config git-ftp.production.password ' + ftp.production.password,
+  'git config git-ftp.production.syncroot ' + ftp.production.root
+]));
 
 gulp.task('watch', function() {
 

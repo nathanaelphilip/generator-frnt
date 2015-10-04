@@ -9,14 +9,14 @@ module.exports = yeoman.generators.Base.extend({
     this.mkdir('html');
     this.destinationRoot('html')
   },
-  
+
   initializing: function () {
     this.pkg = require('../package.json');
     this.choices = {};
   },
 
   prompting: function () {
-    
+
     var done = this.async();
 
     this.log(yosay(
@@ -53,12 +53,12 @@ module.exports = yeoman.generators.Base.extend({
       type: 'list',
       name: 'deploy',
       message: 'What are you going to use to deploy?',
-      choices: ['dandelion','manually'],
+      choices: ['dandelion','gitftp','manually'],
       store: true
     }];
 
     this.prompt(prompts, function (props) {
-      
+
       this.choices.css = props.css;
       this.choices.csshelpers = props.csshelpers;
       this.choices.deploy = props.deploy;
@@ -70,43 +70,52 @@ module.exports = yeoman.generators.Base.extend({
 
   writing: {
     app: function () {
-      
+
       this.fs.copyTpl(
         this.templatePath('_package.json'),
         this.destinationPath('package.json'),
         {'processor': this.choices.css}
       );
-      
+
       this.fs.copy(
         this.templatePath('_bower.json'),
         this.destinationPath('bower.json')
       );
-      
+
       this.fs.copyTpl(
         this.templatePath('_gulp.js'),
         this.destinationPath('gulpfile.js'),
         {'processor': this.choices.css}
       );
-      
+
       this.fs.copy(
         this.templatePath('_csscomb.json'),
         this.destinationPath('.csscomb.json')
       );
-      
+
       this.fs.copy(
         this.templatePath('_composer.json'),
         this.destinationPath('composer.json')
       );
-      
+
       this.fs.copy(
         this.templatePath('_robots.txt'),
         this.destinationPath('../robots.txt')
       );
-      
+
       this.fs.copy(
         this.templatePath('_gitignore'),
         this.destinationPath('../.gitignore')
       );
+
+      if (this.choices.deploy == 'gitftp') {
+
+        this.fs.copyTpl(
+            this.templatePath('_git-ftp-ignore'),
+            this.destinationPath('../.git-ftp-ignore')
+        );
+
+      }
 
       if (this.choices.deploy == 'dandelion') {
 
@@ -115,7 +124,7 @@ module.exports = yeoman.generators.Base.extend({
           this.destinationPath('../production.yml'),
           {'robots': false}
         );
-        
+
         this.fs.copyTpl(
           this.templatePath('_dandelion.yml'),
           this.destinationPath('../staging.yml'),
@@ -123,8 +132,8 @@ module.exports = yeoman.generators.Base.extend({
         );
 
       };
-      
-      
+
+
 
     },
 
@@ -155,7 +164,7 @@ module.exports = yeoman.generators.Base.extend({
         this.templatePath('jshintrc'),
         this.destinationPath('.jshintrc')
       );
-      
+
       // copy over index.php
       this.fs.copyTpl(
         this.templatePath('_index.php'),
@@ -168,7 +177,7 @@ module.exports = yeoman.generators.Base.extend({
         this.templatePath('_functions.php'),
         this.destinationPath('functions.php')
       );
-      
+
       // merge css helpers into a helper.css file
       var helpers = '';
 
@@ -181,7 +190,7 @@ module.exports = yeoman.generators.Base.extend({
       this.fs.write(this.destinationPath('assets/css/helpers.css'),helpers);
 
       if (this.choices.css == 'myth') {
-        
+
         this.fs.copy(
           this.templatePath('css/_myth.css'),
           this.destinationPath('src/css/myth.css')
@@ -190,7 +199,7 @@ module.exports = yeoman.generators.Base.extend({
       };
 
       if (this.choices.css == 'sass') {
-        
+
         this.fs.copy(
           this.templatePath('css/_main.scss'),
           this.destinationPath('src/css/main.scss')
@@ -201,7 +210,6 @@ module.exports = yeoman.generators.Base.extend({
 
       };
 
-      
       // copy over js
       this.fs.copy(
         this.templatePath('js/app.js'),
@@ -216,5 +224,5 @@ module.exports = yeoman.generators.Base.extend({
       skipInstall: this.options['skip-install']
     });
   }
-  
+
 });
