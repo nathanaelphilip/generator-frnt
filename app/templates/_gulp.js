@@ -105,14 +105,14 @@ gulp.task('ftp-setup-staging', $.shell.task([
   'git config git-ftp.staging.user ' + ftp.staging.username,
   'git config git-ftp.staging.url ' + ftp.staging.host,
   'git config git-ftp.staging.password ' + ftp.staging.password,
-  'git config git-ftp.staging.syncroot ' + ftp.staging.root
+  'git config git-ftp.staging.syncroot ' + ftp.staging.syncroot
 ]));
 
 gulp.task('ftp-setup-production', $.shell.task([
   'git config git-ftp.production.user ' + ftp.production.username,
   'git config git-ftp.production.url ' + ftp.production.host,
   'git config git-ftp.production.password ' + ftp.production.password,
-  'git config git-ftp.production.syncroot ' + ftp.production.root
+  'git config git-ftp.production.syncroot ' + ftp.production.syncroot
 ]));
 
 gulp.task('watch', function() {
