@@ -1,5 +1,9 @@
 production.yml
 staging.yml
+.jshintrc
+bower.json
+gulpfile.js
+.editorconfig
 .csscomb.json
 gulfile.js
 package.json
