@@ -73,7 +73,7 @@ module.exports = yeoman.generators.Base.extend({
       this.choices.deploy = props.deploy;
 
       done();
-      
+
     }.bind(this));
 
   },
@@ -251,7 +251,7 @@ module.exports = yeoman.generators.Base.extend({
 
           this.fs.copy(
               this.templatePath('_bundle.config.js'),
-              this.templatePath('bundle.config.js')
+              this.destinationPath('bundle.config.js')
           )
 
       }
