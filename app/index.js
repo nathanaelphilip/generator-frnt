@@ -31,6 +31,13 @@ module.exports = yeoman.generators.Base.extend({
       store: true
     },
     {
+      type: 'list',
+      name: 'jsframework',
+      message: 'Which JS framework do you want to use?',
+      choices: ['backbone','plain'],
+      store: true
+    },
+    {
       type: 'checkbox',
       name: 'csshelpers',
       message: 'Which CSS helpers would you like?',
@@ -69,6 +76,7 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   writing: {
+
     app: function () {
 
       this.fs.copyTpl(
@@ -85,7 +93,10 @@ module.exports = yeoman.generators.Base.extend({
       this.fs.copyTpl(
         this.templatePath('_gulp.js'),
         this.destinationPath('gulpfile.js'),
-        {'processor': this.choices.css}
+        {
+            'processor': this.choices.css,
+            'jsframework': this.choices.jsframework
+        }
       );
 
       this.fs.copy(
@@ -132,8 +143,6 @@ module.exports = yeoman.generators.Base.extend({
         );
 
       };
-
-
 
     },
 
@@ -211,12 +220,40 @@ module.exports = yeoman.generators.Base.extend({
       };
 
       // copy over js
-      this.fs.copy(
-        this.templatePath('js/app.js'),
-        this.destinationPath('src/js/app.js')
-      );
+
+      if (this.choices.jsframework == 'plain') {
+          this.fs.copyTpl(
+            this.templatePath('js/_app.js'),
+            this.destinationPath('src/js/app.js'),
+            {'jsframework': this.choices.jsframework}
+          );
+      }
+
+      if (this.choices.jsframework == 'backbone') {
+
+          this.fs.copyTpl(
+            this.templatePath('js/_app.js'),
+            this.destinationPath('src/js/app.js'),
+            {'jsframework': this.choices.jsframework}
+          );
+
+          this.fs.copyTpl(
+            this.templatePath('js/_main.js'),
+            this.destinationPath('src/js/main.js'),
+            {'jsframework': this.choices.jsframework}
+          );
+
+          this.fs.copy(
+              this.templatePath(_bundlerconfig.json),
+              this.templatePath(bundlerconfig.json)
+          )
+
+      }
+
+
 
     }
+
   },
 
   install: function () {

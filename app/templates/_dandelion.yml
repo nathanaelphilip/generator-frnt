@@ -7,12 +7,16 @@ local_path: html
 
 exclude:
     - .gitignore
+    - .yeopress
     - production.yml
     - staging.yml
     - .csscomb.json
-    - gulfile.js
+    - gulpfile.js
     - package.json
     - composer.json
+    - composer.lock
+    - .jshintrc
+    - editorconfig
     - src/
 additional:
     <% if(robots) { %>- robots.txt<% } %>
