@@ -1,9 +1,11 @@
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var livereload = require('gulp-livereload');
+var bundle = require('gulp-bundle-assets');
 
 <%  var stylesheet = 'myth.css'; if (processor == 'sass') { stylesheet = 'main.scss'; } %>
 
+<% if (deploy === 'gitftp') { %>
 var ftp = {
   staging: {
     'username': 'your ftp username',
@@ -18,6 +20,7 @@ var ftp = {
     'syncroot': 'html', // set local syncroot path. eg. './', './public_html' etc
   }
 }
+<% } %>
 
 var paths = {
   css: {
