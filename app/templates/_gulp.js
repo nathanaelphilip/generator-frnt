@@ -26,7 +26,7 @@ var paths = {
   },
   javascript: {
   	src: ['src/js/**/*.js'],
-  	dest: if (jsframework === 'backbone') {'./assets/js/'}else{'./assets/js/'}
+  	dest: <% if (jsframework === 'backbone'){ %> './assets/js/' <% }else{ %> './assets/js/' <% } %>
   },
   svg: {
     src: ['src/svg/*.svg'],
@@ -50,33 +50,28 @@ gulp.task('copy', function(){
 });
 
 
-if (jsframework === 'backbone') {
+<% if (jsframework === 'backbone') { %>
+gulp.task('js', function() {
 
-    gulp.task('js', function() {
+  return gulp.src(paths.bundler.src)
+        .pipe($.plumber())
+        .pipe(bundle())
+        .pipe($.rename("app.min.js"))
+        .pipe(gulp.dest(paths.javascript.dest))
+        .pipe(livereload());
 
-      return gulp.src(paths.bundler.src)
-            .pipe($.plumber())
-            .pipe(bundle())
-            .pipe($.rename("app.min.js"))
-            .pipe(gulp.dest(paths.javascript.dest))
-            .pipe(livereload());
+});
+<% }else{ %>
+gulp.task('js', function() {
 
-    });
+  return gulp.src(paths.javascript.src)
+        .pipe($.uglify())
+        .pipe($.concat("app.min.js"))
+        .pipe(gulp.dest(paths.javascript.dest))
+        .pipe(livereload());
 
-}else{
-
-    gulp.task('js', function() {
-
-      return gulp.src(paths.javascript.src)
-            .pipe($.uglify())
-            .pipe($.concat("app.min.js"))
-            .pipe(gulp.dest(paths.javascript.dest))
-            .pipe(livereload());
-
-    });
-
-}
-
+});
+<% } %>
 
 gulp.task('img', function() {
 
@@ -107,11 +102,11 @@ gulp.task('css', function() {
   return gulp.src(paths.css.src)
         .pipe($.plumber())
         <% if(processor == 'myth') { %>
-          .pipe($.myth())
+        .pipe($.myth())
         <% } %>
         <% if(processor == 'sass') { %>
-          .pipe($.sass())
-          .pipe($.autoprefixer())
+        .pipe($.sass())
+        .pipe($.autoprefixer())
         <% } %>
         .pipe($.rename('style.css'))
         .pipe($.csscomb())
@@ -120,24 +115,23 @@ gulp.task('css', function() {
 
 });
 
+<% if (deploy === 'gitftp') { %>
 // git ftp init -s staging | git ftp push -s staging
 // git ftp init -s production | git ftp push -s production
+gulp.task('ftp-setup-staging', $.shell.task([
+  'git config git-ftp.staging.user ' + ftp.staging.username,
+  'git config git-ftp.staging.url ' + ftp.staging.host,
+  'git config git-ftp.staging.password ' + ftp.staging.password,
+  'git config git-ftp.staging.syncroot ' + ftp.staging.syncroot
+]));
 
-if (deploy === 'gitftp') {
-    gulp.task('ftp-setup-staging', $.shell.task([
-      'git config git-ftp.staging.user ' + ftp.staging.username,
-      'git config git-ftp.staging.url ' + ftp.staging.host,
-      'git config git-ftp.staging.password ' + ftp.staging.password,
-      'git config git-ftp.staging.syncroot ' + ftp.staging.syncroot
-    ]));
-
-    gulp.task('ftp-setup-production', $.shell.task([
-      'git config git-ftp.production.user ' + ftp.production.username,
-      'git config git-ftp.production.url ' + ftp.production.host,
-      'git config git-ftp.production.password ' + ftp.production.password,
-      'git config git-ftp.production.syncroot ' + ftp.production.syncroot
-    ]));
-}
+gulp.task('ftp-setup-production', $.shell.task([
+  'git config git-ftp.production.user ' + ftp.production.username,
+  'git config git-ftp.production.url ' + ftp.production.host,
+  'git config git-ftp.production.password ' + ftp.production.password,
+  'git config git-ftp.production.syncroot ' + ftp.production.syncroot
+]));
+<% } %>
 
 gulp.task('watch', function() {
 

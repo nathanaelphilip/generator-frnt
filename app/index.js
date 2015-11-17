@@ -1,4 +1,5 @@
 'use strict';
+
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
@@ -68,9 +69,11 @@ module.exports = yeoman.generators.Base.extend({
 
       this.choices.css = props.css;
       this.choices.csshelpers = props.csshelpers;
+      this.choices.jsframework = props.jsframework;
       this.choices.deploy = props.deploy;
 
       done();
+      
     }.bind(this));
 
   },
@@ -95,7 +98,8 @@ module.exports = yeoman.generators.Base.extend({
         this.destinationPath('gulpfile.js'),
         {
             'processor': this.choices.css,
-            'jsframework': this.choices.jsframework
+            'jsframework': this.choices.jsframework,
+            'deploy': this.choices.deploy
         }
       );
 
@@ -219,6 +223,8 @@ module.exports = yeoman.generators.Base.extend({
 
       };
 
+      console.log(this.choices.jsframework);
+
       // copy over js
 
       if (this.choices.jsframework == 'plain') {
@@ -244,13 +250,11 @@ module.exports = yeoman.generators.Base.extend({
           );
 
           this.fs.copy(
-              this.templatePath(_bundlerconfig.json),
-              this.templatePath(bundlerconfig.json)
+              this.templatePath('_bundle.config.js'),
+              this.templatePath('bundle.config.js')
           )
 
       }
-
-
 
     }
 
