@@ -219,12 +219,12 @@ module.exports = yeoman.generators.Base.extend({
           this.destinationPath('src/css/main.scss')
         );
 
-        this.fs.write('src/global/_animations.scss','');
-        this.fs.write('src/global/_colors.scss','');
-        this.fs.write('src/global/_helpers.scss','');
-        this.fs.write('src/global/_fonts.scss','');
-        this.fs.write('src/global/_mixins.scss','');
-        this.fs.write('src/global/_variable.scss','');
+        this.fs.write('src/css/global/_animations.scss','');
+        this.fs.write('src/css/global/_colors.scss','');
+        this.fs.write('src/css/global/_helpers.scss','');
+        this.fs.write('src/css/global/_fonts.scss','');
+        this.fs.write('src/css/global/_mixins.scss','');
+        this.fs.write('src/css/global/_variable.scss','');
 
       };
 
