@@ -167,6 +167,7 @@ module.exports = yeoman.generators.Base.extend({
 
       if (this.choices.css == 'sass') {
         this.mkdir('assets/css/global');
+        this.mkdir('assets/css/views');
       }
 
       this.fs.copy(
@@ -218,12 +219,14 @@ module.exports = yeoman.generators.Base.extend({
           this.destinationPath('src/css/main.scss')
         );
 
-        this.fs.write('assets/src/global/_variable.scss','');
+        this.fs.write('assets/src/global/_animations.scss','');
+        this.fs.write('assets/src/global/_colors.scss','');
+        this.fs.write('assets/src/global/_helpers.scss','');
         this.fs.write('assets/src/global/_fonts.scss','');
+        this.fs.write('assets/src/global/_mixins.scss','');
+        this.fs.write('assets/src/global/_variable.scss','');
 
       };
-
-      console.log(this.choices.jsframework);
 
       // copy over js
 

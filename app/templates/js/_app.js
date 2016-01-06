@@ -1,8 +1,9 @@
 'use strict';
 
-if (jsframework === 'backbone') {
-    // for future
-}else{
+
+<% if (jsframework === 'backbone') { %>
+
+<% } else { %>
 
     jQuery(document).ready(function($) {
 
@@ -71,4 +72,4 @@ if (jsframework === 'backbone') {
     });
 
 
-}
+<% } %>
