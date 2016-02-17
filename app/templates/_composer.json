@@ -2,6 +2,7 @@
     "require": {
         "andreyco/instagram": "~3.3.0",
         "abraham/twitteroauth": "~0.6.2",
-        "drewm/mailchimp-api": "~2.1"
+        "drewm/mailchimp-api": "~2.1",
+        "social-links/social-links": "~1.8.1"
     }
 }
