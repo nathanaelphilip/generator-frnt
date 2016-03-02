@@ -1,6 +1,52 @@
-<?php 
+<?php
 
 	# require_once 'vendor/autoload.php';
+
+    # Wordpress
+
+    if (function_exists('add_action')) {
+
+        define('TMPLT',get_bloginfo('template_directory'));
+        define('TMPLTD',get_template_directory());
+
+        add_filter('show_admin_bar', '__return_false');
+
+        add_action('after_setup_theme','prefix_setup_theme');
+
+        function prefix_setup_theme()
+        {
+            add_theme_support('post-thumbnails');
+            add_theme_support('title-tag');
+        }
+
+        add_action('wp_enqueue_scripts','prefix_enqueue_scripts');
+
+        function prefix_enqueue_scripts()
+        {
+
+            # deenqueue
+            wp_deregister_script('jquery');
+
+            # register
+            wp_register_script('jquery', '//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js', false, '2.2.1', true);
+            wp_register_script('slick', '//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.js', ['jquery'], '1.5.9', true);
+            wp_register_script('app', TMPLT.'/assets/js/app.min.js', ['jquery','gmaps','slick','waypoints'], false, true);
+
+            # enqueue
+            wp_enqueue_script('app');
+
+            # localize
+            wp_localize_script('app','PREFIX',['ajax' => admin_url('admin-ajax.php')]);
+
+        }
+
+    }
+
+    # ACF
+
+    if (function_exists('acf_add_options_page')) {
+        acf_add_options_page('PREFIX Options');
+    }
 
 
 	# MailChimp
@@ -12,7 +58,7 @@
 	function prefix_mailchimp_process($data){
 
 		$MailChimp = schs_mailchimp_initiate();
-		
+
 		$result = $MailChimp->call('lists/subscribe', array(
 					'id'                => '',
 					'email'             => array('email'=>$data['EMAIL']),
@@ -33,10 +79,10 @@
 	function prefix_instagram(){
 
 		$instagram = new Andreyco\Instagram\Client('c95bb5db73c64f55b7cee8430926ecfe');
-		$data = $instagram->getUserMedia('instagramid',5); 
+		$data = $instagram->getUserMedia('instagramid',5);
 
 		return $data->data;
-        
+
     }
 
 	# Forms (Generic)
@@ -59,7 +105,7 @@
 
 	function prefix_process_form($to)
 	{
-		
+
 		$data = $_POST['data'];
 
 		$errors = prefix_check_required_fields($data);
@@ -91,5 +137,3 @@
 
 
 	// helper
-
-	

@@ -21,21 +21,21 @@ module.exports = yeoman.generators.Base.extend({
     var done = this.async();
 
     this.log(yosay(
-      'Welcome to the cat\'s pajamas ' + chalk.red('Frnt') + ' generator!'
+      'Welcome to ' + chalk.red('Frnt') + '!'
     ));
 
     var prompts = [{
       type: 'list',
       name: 'css',
       message: 'Which ' + chalk.red('CSS Processor') + ' would you like to use?',
-      choices: ['myth','sass'],
+      choices: ['sass'],
       store: true
     },
     {
       type: 'list',
       name: 'jsframework',
       message: 'Which JS framework do you want to use?',
-      choices: ['backbone','plain'],
+      choices: ['vue','backbone','none'],
       store: true
     },
     {
@@ -61,7 +61,7 @@ module.exports = yeoman.generators.Base.extend({
       type: 'list',
       name: 'deploy',
       message: 'What are you going to use to deploy?',
-      choices: ['dandelion','gitftp','manually'],
+      choices: ['dandelion','manually'],
       store: true
     }];
 
@@ -86,11 +86,6 @@ module.exports = yeoman.generators.Base.extend({
         this.templatePath('_package.json'),
         this.destinationPath('package.json'),
         {'processor': this.choices.css}
-      );
-
-      this.fs.copy(
-        this.templatePath('_bower.json'),
-        this.destinationPath('bower.json')
       );
 
       this.fs.copyTpl(
@@ -123,15 +118,6 @@ module.exports = yeoman.generators.Base.extend({
         this.destinationPath('../.gitignore')
       );
 
-      if (this.choices.deploy == 'gitftp') {
-
-        this.fs.copyTpl(
-            this.templatePath('_git-ftp-ignore'),
-            this.destinationPath('../.git-ftp-ignore')
-        );
-
-      }
-
       if (this.choices.deploy == 'dandelion') {
 
         this.fs.copyTpl(
@@ -152,22 +138,19 @@ module.exports = yeoman.generators.Base.extend({
 
     projectfiles: function () {
 
-      this.mkdir('src');
-      this.mkdir('src/css');
-      this.mkdir('src/images');
-      this.mkdir('src/js/');
-      this.mkdir('src/svg/');
-
-      this.mkdir('assets');
-      this.mkdir('assets/css');
-      this.mkdir('assets/images');
-      this.mkdir('assets/svg');
-      this.mkdir('assets/js');
-      this.mkdir('assets/js/vendor');
+      this.mkdir('resources');
+      this.mkdir('resources/assets');
+      this.mkdir('resources/assets/sass'); // TODO: make dynamic
+      this.mkdir('resources/assets/js/');
+      this.mkdir('resources/assets/svg/');
 
       if (this.choices.css == 'sass') {
-        this.mkdir('src/css/global');
-        this.mkdir('src/css/views');
+        this.mkdir('resources/assets/sass/base');
+        this.mkdir('resources/assets/sass/vendor');
+        this.mkdir('resources/assets/sass/mixins');
+        this.mkdir('resources/assets/sass/views');
+        this.mkdir('resources/assets/sass/blocks');
+        this.mkdir('resources/assets/sass/states');
       }
 
       this.fs.copy(
@@ -201,30 +184,16 @@ module.exports = yeoman.generators.Base.extend({
 
       };
 
-      this.fs.write(this.destinationPath('assets/css/helpers.css'),helpers);
-
-      if (this.choices.css == 'myth') {
-
-        this.fs.copy(
-          this.templatePath('css/_myth.css'),
-          this.destinationPath('src/css/myth.css')
-        );
-
-      };
+      this.fs.write(this.destinationPath('resources/assets/sass/vendor/helpers.css'),helpers);
 
       if (this.choices.css == 'sass') {
 
         this.fs.copy(
           this.templatePath('css/_main.scss'),
-          this.destinationPath('src/css/main.scss')
+          this.destinationPath('resources/assets/sass/app.scss')
         );
 
-        this.fs.write('src/css/global/_animations.scss','');
-        this.fs.write('src/css/global/_colors.scss','');
-        this.fs.write('src/css/global/_helpers.scss','');
-        this.fs.write('src/css/global/_fonts.scss','');
-        this.fs.write('src/css/global/_mixins.scss','');
-        this.fs.write('src/css/global/_variable.scss','');
+        this.fs.write('resources/assets/sass/base/_base.scss','');
 
       };
 
@@ -233,7 +202,7 @@ module.exports = yeoman.generators.Base.extend({
       if (this.choices.jsframework == 'plain') {
           this.fs.copyTpl(
             this.templatePath('js/_app.js'),
-            this.destinationPath('src/js/app.js'),
+            this.destinationPath('resources/assets/js/app.js'),
             {'jsframework': this.choices.jsframework}
           );
       }
@@ -242,13 +211,13 @@ module.exports = yeoman.generators.Base.extend({
 
           this.fs.copyTpl(
             this.templatePath('js/_app.js'),
-            this.destinationPath('src/js/app.js'),
+            this.destinationPath('resources/assets/js/app.js'),
             {'jsframework': this.choices.jsframework}
           );
 
           this.fs.copyTpl(
             this.templatePath('js/_main.js'),
-            this.destinationPath('src/js/main.js'),
+            this.destinationPath('resources/assets/js/main.js'),
             {'jsframework': this.choices.jsframework}
           );
 
@@ -256,6 +225,10 @@ module.exports = yeoman.generators.Base.extend({
               this.templatePath('_bundle.config.js'),
               this.destinationPath('bundle.config.js')
           )
+
+      }
+
+      if (this.choices.jsframework == 'vue') {
 
       }
 
