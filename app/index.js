@@ -208,7 +208,10 @@ module.exports = yeoman.generators.Base.extend({
           this.destinationPath('resources/assets/sass/blocks/_modal.scss')
         );
 
-        this.fs.write('resources/assets/sass/base/_base.scss','');
+        this.fs.copy(
+          this.templatePath('scss/base/_base.scss'),
+          this.destinationPath('resources/assets/sass/base/_base.scss')
+        );
 
       };
 
