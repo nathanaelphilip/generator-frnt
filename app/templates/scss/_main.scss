@@ -2,8 +2,11 @@
 @import "base/_base";
 
 // mixins
+@import "mixins/_layout";
+@import "mixins/_levels";
 
 // blocks
+@import "blocks/_modal";
 
 // views
 

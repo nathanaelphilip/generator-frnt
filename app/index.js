@@ -189,18 +189,23 @@ module.exports = yeoman.generators.Base.extend({
       if (this.choices.css == 'sass') {
 
         this.fs.copy(
-          this.templatePath('css/_main.scss'),
+          this.templatePath('scss/_main.scss'),
           this.destinationPath('resources/assets/sass/app.scss')
         );
 
         this.fs.copy(
-          this.templatePath('css/_layout.scss'),
+          this.templatePath('scss/mixins/_layout.scss'),
           this.destinationPath('resources/assets/mixins/_layout.scss')
         );
 
         this.fs.copy(
-          this.templatePath('css/_levels.scss'),
+          this.templatePath('scss/mixins/_levels.scss'),
           this.destinationPath('resources/assets/mixins/_levels.scss')
+        );
+
+        this.fs.copy(
+          this.templatePath('scss/blocks/_modal.scss'),
+          this.destinationPath('resources/assets/blocks/_modal.scss')
         );
 
         this.fs.write('resources/assets/sass/base/_base.scss','');
