@@ -6,6 +6,7 @@
     "dependencies": {
         "laravel-elixir": "^5.0.0",
         "laravel-elixir-livereload": "^1.1.4",
-        "laravel-elixir-vueify": "^1.0.2"
+        "laravel-elixir-vueify": "^1.0.2",
+        "laravel-elixir-imagemin": "^0.2.3"
     }
 }
