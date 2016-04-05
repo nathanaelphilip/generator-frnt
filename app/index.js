@@ -195,17 +195,17 @@ module.exports = yeoman.generators.Base.extend({
 
         this.fs.copy(
           this.templatePath('scss/mixins/_layout.scss'),
-          this.destinationPath('resources/assets/mixins/_layout.scss')
+          this.destinationPath('resources/assets/sass/mixins/_layout.scss')
         );
 
         this.fs.copy(
           this.templatePath('scss/mixins/_levels.scss'),
-          this.destinationPath('resources/assets/mixins/_levels.scss')
+          this.destinationPath('resources/assets/sass/mixins/_levels.scss')
         );
 
         this.fs.copy(
           this.templatePath('scss/blocks/_modal.scss'),
-          this.destinationPath('resources/assets/blocks/_modal.scss')
+          this.destinationPath('resources/assets/sass/blocks/_modal.scss')
         );
 
         this.fs.write('resources/assets/sass/base/_base.scss','');
