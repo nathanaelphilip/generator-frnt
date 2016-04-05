@@ -180,7 +180,7 @@ module.exports = yeoman.generators.Base.extend({
 
       for (var i = this.choices.csshelpers.length - 1; i >= 0; i--) {
 
-        helpers += this.fs.read(this.templatePath('css/helpers/_'+this.choices.csshelpers[i].toLowerCase()+'.css'));
+        helpers += this.fs.read(this.templatePath('scss/vendor/_'+this.choices.csshelpers[i].toLowerCase()+'.css'));
 
       };
 
@@ -191,6 +191,11 @@ module.exports = yeoman.generators.Base.extend({
         this.fs.copy(
           this.templatePath('css/_main.scss'),
           this.destinationPath('resources/assets/sass/app.scss')
+        );
+
+        this.fs.copy(
+          this.templatePath('css/_layout.scss'),
+          this.destinationPath('resources/assets/mixins/_layout.scss')
         );
 
         this.fs.write('resources/assets/sass/base/_base.scss','');
