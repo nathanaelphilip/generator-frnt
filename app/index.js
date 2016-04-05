@@ -198,6 +198,11 @@ module.exports = yeoman.generators.Base.extend({
           this.destinationPath('resources/assets/mixins/_layout.scss')
         );
 
+        this.fs.copy(
+          this.templatePath('css/_levels.scss'),
+          this.destinationPath('resources/assets/mixins/_levels.scss')
+        );
+
         this.fs.write('resources/assets/sass/base/_base.scss','');
 
       };
