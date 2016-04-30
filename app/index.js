@@ -39,25 +39,6 @@ module.exports = yeoman.generators.Base.extend({
       store: true
     },
     {
-      type: 'checkbox',
-      name: 'csshelpers',
-      message: 'Which CSS helpers would you like?',
-      choices: [
-        {
-          name: 'Helpers',
-          checked: true
-        },
-        {
-          name: 'Reset',
-          checked: true
-        },
-        {
-          name: 'Normalize',
-          checked: true
-        }
-      ],
-      store: true
-    },{
       type: 'list',
       name: 'deploy',
       message: 'What are you going to use to deploy?',
@@ -175,42 +156,12 @@ module.exports = yeoman.generators.Base.extend({
         this.destinationPath('functions.php')
       );
 
-      // merge css helpers into a helper.css file
-      var helpers = '';
-
-      for (var i = this.choices.csshelpers.length - 1; i >= 0; i--) {
-
-        helpers += this.fs.read(this.templatePath('scss/vendor/_'+this.choices.csshelpers[i].toLowerCase()+'.css'));
-
-      };
-
-      this.fs.write(this.destinationPath('resources/assets/sass/vendor/helpers.css'),helpers);
 
       if (this.choices.css == 'sass') {
 
         this.fs.copy(
-          this.templatePath('scss/_main.scss'),
-          this.destinationPath('resources/assets/sass/app.scss')
-        );
-
-        this.fs.copy(
-          this.templatePath('scss/mixins/_layout.scss'),
-          this.destinationPath('resources/assets/sass/mixins/_layout.scss')
-        );
-
-        this.fs.copy(
-          this.templatePath('scss/mixins/_levels.scss'),
-          this.destinationPath('resources/assets/sass/mixins/_levels.scss')
-        );
-
-        this.fs.copy(
-          this.templatePath('scss/blocks/_modal.scss'),
-          this.destinationPath('resources/assets/sass/blocks/_modal.scss')
-        );
-
-        this.fs.copy(
-          this.templatePath('scss/base/_base.scss'),
-          this.destinationPath('resources/assets/sass/base/_base.scss')
+          this.templatePath('scss/**/*'),
+          this.destinationPath('resources/assets/sass')
         );
 
       };

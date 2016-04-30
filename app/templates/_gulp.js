@@ -6,5 +6,12 @@ elixir(function(mix){
     mix.sass("app.scss")
        .scripts(['app.js'])
        .imagemin()
-       .browserSync({proxy: 'http://'});
+       .browserSync({
+           proxy: 'http://',
+           files: [
+               '**/*.php',
+               'public/css/app.css',
+               'public/js/all.js',
+           ]
+       });
 });

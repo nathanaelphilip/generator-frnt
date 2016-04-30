@@ -1,13 +1,20 @@
 // setup
-@import "base/_base";
+@import "_init";
 
 // mixins
-@import "mixins/_layout";
-@import "mixins/_levels";
+@import "mixins/index";
+
+// components
+@import "components/index";
+
+// cards
+@import "cards/index";
 
 // blocks
-@import "blocks/_modal";
+@import "blocks/index";
 
 // views
+@import "views/index";
 
 // states
+@import "states/index";
