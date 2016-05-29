@@ -35,7 +35,7 @@ module.exports = yeoman.generators.Base.extend({
       type: 'list',
       name: 'jsframework',
       message: 'Which JS framework do you want to use?',
-      choices: ['vue','backbone','none'],
+      choices: ['vue','backbone','jquery'],
       store: true
     },
     {
@@ -121,17 +121,17 @@ module.exports = yeoman.generators.Base.extend({
 
       this.mkdir('resources');
       this.mkdir('resources/assets');
-      this.mkdir('resources/assets/sass'); // TODO: make dynamic
       this.mkdir('resources/assets/js/');
-      this.mkdir('resources/assets/svg/');
+      this.mkdir('resources/assets/images/');
 
       if (this.choices.css == 'sass') {
-        this.mkdir('resources/assets/sass/base');
-        this.mkdir('resources/assets/sass/vendor');
-        this.mkdir('resources/assets/sass/mixins');
-        this.mkdir('resources/assets/sass/views');
-        this.mkdir('resources/assets/sass/blocks');
-        this.mkdir('resources/assets/sass/states');
+        this.mkdir('resources/assets/sass'); // TODO: make dynamic
+
+        this.fs.copy(
+          this.templatePath('scss/**/*'),
+          this.destinationPath('resources/assets/sass')
+        );
+
       }
 
       this.fs.copy(
@@ -156,25 +156,7 @@ module.exports = yeoman.generators.Base.extend({
         this.destinationPath('functions.php')
       );
 
-
-      if (this.choices.css == 'sass') {
-
-        this.fs.copy(
-          this.templatePath('scss/**/*'),
-          this.destinationPath('resources/assets/sass')
-        );
-
-      };
-
       // copy over js
-
-      if (this.choices.jsframework == 'plain') {
-          this.fs.copyTpl(
-            this.templatePath('js/_app.js'),
-            this.destinationPath('resources/assets/js/app.js'),
-            {'jsframework': this.choices.jsframework}
-          );
-      }
 
       if (this.choices.jsframework == 'backbone') {
 
@@ -199,6 +181,14 @@ module.exports = yeoman.generators.Base.extend({
 
       if (this.choices.jsframework == 'vue') {
 
+      }
+
+      if (this.choices.jsframework == 'jquery') {
+          this.fs.copyTpl(
+            this.templatePath('js/_app.js'),
+            this.destinationPath('resources/assets/js/app.js'),
+            {'jsframework': this.choices.jsframework}
+          );
       }
 
     }
