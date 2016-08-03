@@ -30,7 +30,7 @@
             # register
             wp_register_script('jquery', '//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js', false, '2.2.1', true);
             wp_register_script('slick', '//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.js', ['jquery'], '1.5.9', true);
-            wp_register_script('app', TMPLT.'/assets/js/app.min.js', ['jquery','gmaps','slick','waypoints'], false, true);
+            wp_register_script('app', TMPLT.'/assets/js/app.min.js', ['jquery','slick'], false, true);
 
             # enqueue
             wp_enqueue_script('app');
@@ -76,7 +76,45 @@
 
 	# Instagram
 
-	function prefix_instagram(){
+    function prefix_instagram(){
+
+        $images = get_transient('hs.instagram');
+
+        if (!$images) {
+
+            $username = 'hosea2nd';
+            $url = 'https://www.instagram.com/'.$username.'/media';
+
+            $limit = 3;
+
+            $response = wp_remote_get($url);
+            $data = wp_remote_retrieve_body($response);
+
+            $data = json_decode($data);
+
+            $images = [];
+            $count = 1;
+
+            foreach ($data->items as $datum) {
+                $images[] = $datum;
+
+                if ($count === $limit) {
+                    break;
+                }
+
+                $count++;
+
+            }
+
+            set_transient('hs.instagram',$images,HOUR_IN_SECONDS*1);
+
+        }
+
+        return $images;
+
+    }
+
+	function prefix_instagram_api(){
 
 		$instagram = new Andreyco\Instagram\Client('c95bb5db73c64f55b7cee8430926ecfe');
 		$data = $instagram->getUserMedia('instagramid',5);

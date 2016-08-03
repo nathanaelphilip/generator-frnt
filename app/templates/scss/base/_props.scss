@@ -1,0 +1,19 @@
+.prop-full-width{
+    display: block;
+    height: auto;
+    width: 100%;
+}
+
+.prop-max-width{
+    display: block;
+    height: auto;
+    max-width: 100%;
+}
+
+.prop-overlay{
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
